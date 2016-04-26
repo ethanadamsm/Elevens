@@ -40,6 +40,7 @@ public class Shuffler {
 			System.out.println();
 		}
 		System.out.println();
+		System.out.println(arePermutations(values1, values2));
 	}
 
 
@@ -50,7 +51,24 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void perfectShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		int[] fir = new int[values.length/2];
+		int[] sec = new int[values.length/2];
+	
+		for(int i = 0; i < values.length/2; i++){
+			fir[i] = values[i];
+		}
+		for(int i = values.length/2; i < values.length; i++){
+			sec[i - values.length/2] = values[i];
+		}
+		for(int i = 0; i < values.length;i ++){
+			if(i % 2 == 0){
+				values[i] = fir[i/2];
+			}
+			else{
+				values[i] = sec[(i-1)/2];
+			}
+			
+		}
 	}
 
 	/**
@@ -65,6 +83,31 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void selectionShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		int rand;
+		int[] temparray = values;
+		for(int i = 0; i < values.length; i++){
+			rand = (int) ((values.length) * Math.random());
+			int temp = values[rand];
+			temparray[rand] = values[i];
+			values[i] = temp;
+		}
+	}
+	
+	public static boolean arePermutations(int[] values1, int[] values2){
+		if(values1.length != values2.length){
+			return false;
+		}
+		outerloop:
+		for(int i = 0; i < values1.length; i++){
+			for(int x = 0; x < values2.length; x++){
+				if(values2[x] != values1[i]){
+					continue;
+				}else{
+					continue outerloop;
+				}
+			}
+			return false;
+		}
+		return true;
 	}
 }
